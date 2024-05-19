@@ -1,0 +1,87 @@
+# ubunt22.04にpython、poetryを入れる
+
+
+sudo apt update
+sudo apt upgrade -y
+
+sudo apt install python3.11
+
+python3.11 --version
+
+Poetryのインストール
+
+
+curl -sSL https://install.python-poetry.org | python3.11 -
+
+2. シェル設定ファイルの更新
+Poetryのインストールパスをシェルの設定ファイル（例：~/.bashrcまたは~/.zshrc）に追加します。
+
+echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
+source ~/.bashrc
+
+
+poetry --version
+
+
+
+ubuntのレポジトリにpython3.11がなければ、
+デッドスネークスPPAの追加
+sudo add-apt-repository ppa:deadsnakes/ppa
+sudo apt update
+
+Python 3.11のインストール
+sudo apt install python3.11
+
+
+
+#git初期設定
+git config --global user.name "Your Name"
+git config --global user.email "youremail@example.com"
+git config --global color.ui auto
+
+git clone 
+
+
+git add .gitignore
+git commit -m "Add .gitignore to exclude specific files and folders"
+
+
+
+
+タートイズgitで認識できるように設定。
+windows側にgitを入れる。
+powershellで
+git config --global --add safe.directory '*'
+
+
+githubと連携
+ls ~/.ssh
+ssh-keygen -t ed25519 -C "your_email@example.com"
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_ed25519
+
+コピー
+cat ~/.ssh/id_ed25519.pub
+
+GitHubにログインし、右上のプロフィールアイコンをクリックして「Settings」を選択。
+左側のメニューから「SSH and GPG keys」を選択。
+「New SSH key」をクリックし、キーに名前を付け、公開鍵の内容を「Key」フィールドに貼り付けて「Add SSH key」をクリック。
+
+確認
+ssh -T git@github.com
+
+
+
+gitコマンド
+git pull origin develop
+git branch feature-
+git switch feature-
+git push origin feature
+
+git branch
+git status
+git add .
+git commit -m ""
+
+
+
