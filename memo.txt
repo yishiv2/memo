@@ -85,3 +85,40 @@ git commit -m ""
 
 
 
+コンテナ内で	fastapiをデバッカーをつくる
+debugpyをpoetryに入れる(poetry)
+.vscode にlauch.jsonをつくる
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Python: Attach to FastAPI",
+        "type": "debugpy",
+        "request": "attach",
+        "connect": {
+          "host": "0.0.0.0",
+          "port": 5678
+        },
+        "pathMappings": [
+          {
+            "localRoot": "${workspaceFolder}/app",
+            "remoteRoot": "/app/app"
+          }
+        ],
+        "justMyCode": true
+      }
+    ]
+  }
+
+
+
+コンテナ内に、attchするので、コード内で明示的に、リッスンする必要がある。デバック用のポート(5678)をcompose.ymlで空けておく必要がある
+@app.on_event("startup")
+def on_startup():
+    init_db()
+    init_initial_data()
+    # デバッグ用のコードを追加
+    debugpy.listen(("0.0.0.0", 5678))
+    logger.info("Waiting for debugger attach...")
+    debugpy.wait_for_client()
+    logger.info("Debugger attached")
