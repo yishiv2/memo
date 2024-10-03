@@ -1,28 +1,16 @@
 # ubunt22.04にpython、poetryを入れる
-
-
 sudo apt update
 sudo apt upgrade -y
-
 sudo apt install python3.11
-
 python3.11 --version
-
 Poetryのインストール
-
-
 curl -sSL https://install.python-poetry.org | python3.11 -
 
 2. シェル設定ファイルの更新
 Poetryのインストールパスをシェルの設定ファイル（例：~/.bashrcまたは~/.zshrc）に追加します。
-
 echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
 source ~/.bashrc
-
-
 poetry --version
-
-
 
 ubuntのレポジトリにpython3.11がなければ、
 デッドスネークスPPAの追加
@@ -41,51 +29,31 @@ git config --global color.ui auto
 
 git clone 
 
-
 git add .gitignore
 git commit -m "Add .gitignore to exclude specific files and folders"
 
 
+git初期設定関連
+https://qiita.com/ucan-lab/items/aadbedcacbc2ac86a2b3
 
+もしくはトークンでの認証
+https://qiita.com/sin9270/items/aaebfa66865280d6c3d7
 
-タートイズgitで認識できるように設定。
-windows側にgitを入れる。
-powershellで
-git config --global --add safe.directory '*'
+python用vscode設定(ruffを使用)
+https://blog.teclado.com/how-to-set-up-visual-studio-code-for-python-development/
 
+fastapiのドキュメントのドキュメント
+https://github.com/mjhea0/awesome-fastapi?tab=readme-ov-file#databases
 
-githubと連携
-ls ~/.ssh
-ssh-keygen -t ed25519 -C "your_email@example.com"
-eval "$(ssh-agent -s)"
-ssh-add ~/.ssh/id_ed25519
-
-コピー
-cat ~/.ssh/id_ed25519.pub
-
-GitHubにログインし、右上のプロフィールアイコンをクリックして「Settings」を選択。
-左側のメニューから「SSH and GPG keys」を選択。
-「New SSH key」をクリックし、キーに名前を付け、公開鍵の内容を「Key」フィールドに貼り付けて「Add SSH key」をクリック。
-
-確認
-ssh -T git@github.com
-
-
-
-gitコマンド
-git pull origin develop
-git branch feature-
-git switch feature-
-git push origin feature
-
-git branch
-git status
-git add .
-git commit -m ""
-
+fastapiの参考になるコード
+https://github.com/jod35/fastapi-beyond-CRUD/tree/main
+https://github.com/jod35/Noted-FastAPI/blob/main/crud.py
+https://github.com/Describly/fastapi-tdd-user-authentication/blob/main/app/services/user.py
 
 
 コンテナ内で	fastapiをデバッカーをつくる
+参考)https://note.com/mizutory/n/nffaf64d60708
+
 debugpyをpoetryに入れる(poetry)
 .vscode にlauch.jsonをつくる
 {
@@ -112,13 +80,28 @@ debugpyをpoetryに入れる(poetry)
 
 
 
-コンテナ内に、attchするので、コード内で明示的に、リッスンする必要がある。デバック用のポート(5678)をcompose.ymlで空けておく必要がある
-@app.on_event("startup")
-def on_startup():
-    init_db()
-    init_initial_data()
-    # デバッグ用のコードを追加
-    debugpy.listen(("0.0.0.0", 5678))
-    logger.info("Waiting for debugger attach...")
-    debugpy.wait_for_client()
-    logger.info("Debugger attached")
+#プロジェクト初日に行うこと
+1. プロジェクト環境のセットアップ
+プロジェクトのリポジトリにアクセスし、ローカルにクローンします。
+使用するプログラミング言語やフレームワークの依存関係をインストールします（Pythonプロジェクトの場合は requirements.txt や Pipfile を使います）。
+開発環境を構築します。例えば、IDEの設定やDocker、仮想環境の構築を行います。
+ローカル環境でアプリケーションが正常に動作するか確認します（テストの実行やサーバーの起動など）。
+2. プロジェクトの概要とドキュメントの確認
+README、CONTRIBUTINGガイド、APIドキュメントなどを確認し、プロジェクトの概要や目的を理解します。
+メインのディレクトリ構造や重要なファイルをざっと見て、コード全体の設計を把握します。
+3. チームとのコミュニケーション
+チームと挨拶し、自己紹介をします。プロジェクトのコミュニケーションチャンネル（Slack、Teams、メールなど）を確認します。
+プロジェクトマネージャーやリーダー、開発メンバーなどの担当者を把握します。
+不明点をまとめ、適宜質問できるように準備します。
+4. プロジェクトの開発プロセスの理解
+チームがどのようにコードレビューを行うか、ブランチ戦略（Git Flowなど）、リリースサイクルを確認します。
+JIRA、Trello、GitHub Projects などのタスク管理ツールの使い方を確認し、初日にアサインされるタスクをチェックします。
+5. 初日のタスク実施
+環境構築が完了し、プロジェクトの概要がつかめたら、初日の簡単なタスク（ドキュメントの更新や小さなバグの修正など）に取り組みます。
+6. 開発環境の確認
+バグ報告や機能リクエストがどのように管理されているか（JIRA、GitHub Issues など）を確認します。
+CI/CDパイプラインについて確認し、テストやデプロイがどのように自動化されているかを理解します。
+7. ドキュメントの更新
+環境セットアップの際に気付いた不明点や改善点をドキュメントに追記し、プロジェクトへの早期の貢献を行います。
+
+
