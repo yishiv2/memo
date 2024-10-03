@@ -36,7 +36,7 @@ git commit -m "Add .gitignore to exclude specific files and folders"
 git初期設定関連
 https://qiita.com/ucan-lab/items/aadbedcacbc2ac86a2b3
 
-もしくはトークンでの認証
+もしくはgithubトークンでの認証
 https://qiita.com/sin9270/items/aaebfa66865280d6c3d7
 
 python用vscode設定(ruffを使用)
@@ -103,5 +103,73 @@ JIRA、Trello、GitHub Projects などのタスク管理ツールの使い方を
 CI/CDパイプラインについて確認し、テストやデプロイがどのように自動化されているかを理解します。
 7. ドキュメントの更新
 環境セットアップの際に気付いた不明点や改善点をドキュメントに追記し、プロジェクトへの早期の貢献を行います。
+
+
+#wslのインストール
+手順1: WSLを有効化する
+PowerShellを管理者として実行
+
+スタートメニューで「PowerShell」と検索し、右クリックして「管理者として実行」を選択します。
+WSLの有効化
+以下のコマンドをPowerShellで実行して、WSLと仮想マシンプラットフォームを有効にします。
+
+powershell
+wsl --install
+このコマンドを実行すると、WSLの最新バージョン（現在はWSL 2）と既定のLinuxディストリビューション（Ubuntu）が自動的にインストールされます。既定では最新のLTS版（現時点ではUbuntu 22.04）がインストールされます。
+
+PCの再起動
+WSLの有効化が完了したら、PCを再起動します。
+
+手順2: Ubuntu 22.04をインストールする
+Ubuntuのインストール
+再起動後、自動的にUbuntuのインストールが開始されます。まだインストールされていない場合は、次のコマンドで手動でインストールします。
+
+wsl --install -d Ubuntu-22.04
+wsl -l -v
+
+#docekrインストール
+必要なパッケージのインストール
+sudo apt update
+sudo apt install -y ca-certificates curl gnupg lsb-release
+
+Docker公式のGPGキーを追加
+sudo mkdir -p /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+
+Dockerリポジトリを追加
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+Dockerのインストール
+sudo apt update
+sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+Dockerのインストール
+sudo service docker start
+sudo systemctl enable docker
+
+Dockerサービスの起動と有効化
+sudo service docker start
+sudo systemctl enable docker
+
+権限の設定
+ユーザーをdockerグループに追加
+sudo usermod -aG docker $USER
+
+変更を反映するためにターミナルを再起動
+
+動作確認
+docker run hello-world
+docker compose version
+
+#gitインストール
+sudo apt update
+sudo apt install git -y
+
+git config --global user.name "あなたの名前"
+git config --global user.email "あなたのメールアドレス"
+
+git config --list
 
 
