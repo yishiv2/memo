@@ -125,9 +125,11 @@ WSLの有効化が完了したら、PCを再起動します。
 手順2: Ubuntu 22.04をインストールする
 Ubuntuのインストール
 再起動後、自動的にUbuntuのインストールが開始されます。まだインストールされていない場合は、次のコマンドで手動でインストールします。
-
 wsl --install -d Ubuntu-22.04
 wsl -l -v
+
+エラーが出た場合は、以下を参考に
+https://qiita.com/kanamekun/items/63d93034fbe919a58fca
 
 #docekrインストール
 必要なパッケージのインストール
